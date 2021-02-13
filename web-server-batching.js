@@ -18,7 +18,7 @@ const server = createServer(async (req, res) => {
     return res.end()
   }
 
-  const units = await getUnitsFromDb()
+  const units = await getAvailableUnitsFromDb()
 
   res.writeHead(200)
   res.end(JSON.stringify(units))
@@ -28,7 +28,7 @@ server.listen(8000, () => console.log('Web server started at http://localhost:80
 
 let pendingRequest = null
 
-async function getUnitsFromDb () {
+async function getAvailableUnitsFromDb () {
   if (pendingRequest) {
     console.log('batching')
     return pendingRequest
